@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-salt: #CED4C1;
+  --color-shipmate: #77A2CB;
+  --color-sage: #929687;
+  --color-kingtide: #2B737C;
+  --color-khaki: #5E6836;
+  --color-darkness: #171C0E;
+}
+
+/* Base resets & typography */
+html {
+  background-color: #171C0E;
+  color: #171C0E;
+  scroll-behavior: auto; /* Managed by Lenis */
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  background-color: #CED4C1;
+  color: #171C0E;
+  overflow-x: hidden;
+  max-width: 100vw;
+  position: relative;
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile iOS input auto-zoom prevention */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Luxury Film Grain Overlay */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Selection */
+::selection {
+  background-color: #2B737C;
+  color: #CED4C1;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #171C0E;
+}
+::-webkit-scrollbar-thumb {
+  background: #2B737C;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #77A2CB;
+}
+
+/* Lenis smooth scrolling rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Luxury Editorial Typography Styles */
+.font-display-italic {
+  font-family: var(--font-display), var(--font-serif), serif;
+  font-style: italic;
+}
+
+.font-editorial {
+  font-family: var(--font-serif), serif;
+  letter-spacing: -0.02em;
+}
+
+/* Subtle architectural borders */
+.border-salt-dim {
+  border-color: rgba(206, 212, 193, 0.22);
+}
+
+.border-darkness-dim {
+  border-color: rgba(23, 28, 14, 0.15);
+}
+
+/* Animated Waterline Wave */
+.waterline-wave {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: draw-wave 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes draw-wave {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Waterline shimmer line */
+.waterline-accent {
+  position: relative;
+  display: inline-block;
+}
+.waterline-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #2B737C, #77A2CB, transparent);
+  animation: waterline-shimmer 4s ease-in-out infinite;
+}
+
+@keyframes waterline-shimmer {
+  0% { transform: scaleX(0.7); opacity: 0.4; }
+  50% { transform: scaleX(1); opacity: 0.9; }
+  100% { transform: scaleX(0.7); opacity: 0.4; }
+}
+
+/* Luxury Image clip mask transitions */
+.clip-mask-reveal {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clip-mask-hidden {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+
+.clip-mask-expand {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Text Mask Reveal helper */
+.overflow-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.text-reveal-line {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.text-reveal-line.revealed {
+  transform: translateY(0%);
+}
+
+/* Custom cursor */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor {
+    cursor: none;
+  }
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor input,
+  body.has-custom-cursor select,
+  body.has-custom-cursor textarea,
+  body.has-custom-cursor [role="button"] {
+    cursor: none;
+  }
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
